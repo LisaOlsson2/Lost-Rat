@@ -12,11 +12,11 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
     GameObject ground;
 
-    bool grounded;
+    bool grounded, flipped;
 
     void Start()
     {
-        Time.timeScale = 1.7f;
+        Time.timeScale = 1.8f;
         rb = GetComponent<Rigidbody>();
     }
     void Update()
@@ -38,7 +38,7 @@ public class Movement : MonoBehaviour
             {
                 rb.AddForce(Vector3.up * jumpForce);
             }
-            else
+            else if (!flipped)
             {
                 StartCoroutine(Flip());
             }
@@ -50,6 +50,7 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground") && collision.GetContact(0).normal == Vector3.up)
         {
             ground = collision.gameObject;
+            flipped = false;
             grounded = true;
         }
     }
@@ -64,11 +65,10 @@ public class Movement : MonoBehaviour
 
     IEnumerator Flip()
     {
+        flipped = true;
+        rb.useGravity = false;
+        rb.velocity = Vector3.zero;
         yield return new WaitForSeconds(flipTime);
-    }
-
-    int GetDirection(float f)
-    {
-        return (int)(Mathf.Abs(f) / f);
+        rb.useGravity = true;
     }
 }
