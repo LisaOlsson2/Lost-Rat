@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    readonly float legStrength = 4300, jumpForce = 700, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 9, extraJumpForce = 200, timescale = 1.8f, camBorder = 110;
+    readonly float legStrength = 4300, jumpForce = 550, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 10, extraJumpForce = 140, timescale = 1.8f, camBorder = 110;
 
     [SerializeField]
     Transform cam;
