@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    readonly float legStrength = 4300, jumpForce = 550, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 10, extraJumpForce = 140, timescale = 1.8f, camBorder = 110;
+    readonly float legStrength = 4300, jumpForce = 450, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 11, extraJumpForce = 130, timescale = 1.4f, camBorder = 110, rotationSpeed = 50;
 
     [SerializeField]
     Transform cam;
@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     GameObject ground;
 
     bool grounded, flipped;
+    int rotating;
 
     void Start()
     {
@@ -21,6 +22,29 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
+        /*
+        if (rotating == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                rotating = 1;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                rotating = -1;
+            }
+        }
+        else if (transform.eulerAngles.y < (rotating - 1) * -180 + rotating * 10)
+        {
+            transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + rotationSpeed * rotating * Time.deltaTime, 0);
+        }
+        else
+        {
+            rotating = 0;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        */
+
         if ((cam.position.x < camBorder && cam.position.x < transform.position.x) || (cam.position.x > -camBorder && cam.position.x > transform.position.x))
         {
             cam.position = new Vector3(transform.position.x, cam.position.y, cam.position.z);
@@ -44,11 +68,16 @@ public class Movement : MonoBehaviour
             }
             else if (!flipped)
             {
-                StartCoroutine(Flip());
+                //StartCoroutine(Flip());
             }
         }
 
-        if (Input.GetKey(KeyCode.W) && rb.velocity.y > 0 && rb.velocity.y < maxJumpVelocity)
+        if (Input.GetKeyDown(KeyCode.Space) && !flipped && !grounded)
+        {
+            StartCoroutine(Flip());
+        }
+
+        if (Input.GetKey(KeyCode.W) && !flipped && rb.velocity.y > 0 && rb.velocity.y < maxJumpVelocity)
         {
             rb.AddForce(Vector3.up * extraJumpForce * Time.deltaTime);
         }
