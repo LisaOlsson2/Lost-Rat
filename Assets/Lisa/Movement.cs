@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    readonly float legStrength = 4300, jumpForce = 700, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 9, extraJumpForce = 200;
+    readonly float legStrength = 4300, jumpForce = 700, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 9, extraJumpForce = 200, timescale = 1.8f, camBorder = 110;
 
     [SerializeField]
     Transform cam;
@@ -16,12 +16,15 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1.8f;
+        Time.timeScale = timescale;
         rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
-        cam.position = new Vector3(transform.position.x, cam.position.y, cam.position.z);
+        if (((cam.position.x < camBorder && cam.position.x < transform.position.x) || (cam.position.x > -camBorder && cam.position.x > transform.position.x)))
+        {
+            cam.position = new Vector3(transform.position.x, cam.position.y, cam.position.z);
+        }
 
         if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxVelocity)
         {
