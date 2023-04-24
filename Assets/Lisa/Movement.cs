@@ -21,9 +21,10 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        if (((cam.position.x < camBorder && cam.position.x < transform.position.x) || (cam.position.x > -camBorder && cam.position.x > transform.position.x)))
+        if ((cam.position.x < camBorder && cam.position.x < transform.position.x) || (cam.position.x > -camBorder && cam.position.x > transform.position.x))
         {
             cam.position = new Vector3(transform.position.x, cam.position.y, cam.position.z);
+            //cam.position += new Vector3(transform.position.x - cam.position.x, 0, 0) * camSpeed * Time.deltaTime;
         }
 
         if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxVelocity)
