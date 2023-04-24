@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Lisa/Lisas Scene.unity
+    guid: ba901111c8be6a54298e5465acc14d0f
   m_configObjects: {}
