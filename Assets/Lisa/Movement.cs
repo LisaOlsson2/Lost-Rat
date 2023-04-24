@@ -10,11 +10,13 @@ public class Movement : MonoBehaviour
     Transform cam;
 
     Rigidbody rb;
+    GameObject ground;
 
     bool grounded;
 
     void Start()
     {
+        Time.timeScale = 1.7f;
         rb = GetComponent<Rigidbody>();
     }
     void Update()
@@ -47,13 +49,14 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") && collision.GetContact(0).normal == Vector3.up)
         {
+            ground = collision.gameObject;
             grounded = true;
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject == ground)
         {
             grounded = false;
         }
