@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    readonly float legStrength = 4300, jumpForce = 700, maxVelocity = 13, flipTime = 0.8f;
+    readonly float legStrength = 4300, jumpForce = 700, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 9, extraJumpForce = 200;
 
     [SerializeField]
     Transform cam;
@@ -42,6 +42,11 @@ public class Movement : MonoBehaviour
             {
                 StartCoroutine(Flip());
             }
+        }
+
+        if (Input.GetKey(KeyCode.W) && rb.velocity.y > 0 && rb.velocity.y < maxJumpVelocity)
+        {
+            rb.AddForce(Vector3.up * extraJumpForce * Time.deltaTime);
         }
     }
 
