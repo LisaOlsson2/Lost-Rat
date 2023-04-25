@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Alex/Menu.unity
+    guid: 16b81e54b6d0bc3438f813fa3373f1f7
   - enabled: 1
-    path: Assets/Lisa/Lisas Scene.unity
+    path: Assets/Lisa/Cutscene.unity
+    guid: e3d7392e3fb22ac4095780931f9dd139
+  - enabled: 1
+    path: Assets/Lisa/Game Scene.unity
     guid: ba901111c8be6a54298e5465acc14d0f
+  - enabled: 1
+    path: Assets/Lisa/Ending.unity
+    guid: aed72f68afb25f945ac3c9e50c2e2526
   m_configObjects: {}
