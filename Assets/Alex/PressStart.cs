@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+//I HAVE NP PLUS A BAZILLION ESSAYS TO WRITE WHY DID I SIGN UP FOR THIS.
 
 public class PressStart : MonoBehaviour
 {
     [SerializeField]
-    public TMP_Text startText;
-    bool startIsUp;
+    public AudioSource bgMusic;
     [SerializeField]
     public KeyCode enter;
     [SerializeField]
@@ -21,55 +21,64 @@ public class PressStart : MonoBehaviour
     public KeyCode left;
     [SerializeField]
     public KeyCode right;
-    public static KeyCode enterParsed;
-    public static KeyCode backParsed;
-    public static KeyCode upParsed;
-    public static KeyCode downParsed;
-    public static KeyCode leftParsed;
-    public static KeyCode rightParsed;
-
+    [SerializeField]
+    public Vector3[] positions;
+    [SerializeField]
+    int currentPos;
+    float timer;
     // Start is called before the first frame update
     void Start()
     {
-        startText = this.GetComponent<TMP_Text>();
-        startIsUp = true;
-        enterParsed = enter;
-        backParsed = back;
-        upParsed = up;
-        downParsed = down;
-        leftParsed = left;
-        rightParsed = right;
+        currentPos = 0;
+        timer = 0;
+        bgMusic.Play();
     }
 
     // Update is called once per frame
     void Update()   
     {
-        startText.text = "- Press " + enterParsed + " to Start -";
-        if (startIsUp)
+        transform.position = Vector3.MoveTowards(transform.position, positions[currentPos], Time.deltaTime * 10);
+        timer += Time.deltaTime;
+        if (Input.GetKey(up) && currentPos == 0)
         {
-            FadeIn();
-        }
-        else if(!startIsUp)
-        {
-            FadeOut();
-        }
-        if(Input.GetKey(enter))
-        {
-            startIsUp = false;
-        }
-        else if(Input.GetKey(backParsed))
-        {
-            startIsUp = true;
-        }
-    }
+            currentPos = 1;
+            timer = 0;
 
-    void FadeOut()
-    {
-        startText.CrossFadeAlpha(0, 20 * Time.deltaTime, true);
-    }
+        }
+        else if (Input.GetKey(down) && currentPos == 0)
+        {
+            currentPos = 3;
+            timer = 0;
+        }
+        if (Input.GetKey(up) && timer > 0.15f)
+        {
+            if(currentPos == 1)
+            {
+                currentPos= 3;
+            }
+            else
+            {
+                currentPos += -1;
+            }
+            timer = 0;
 
-    void FadeIn()
-    {
-        startText.CrossFadeAlpha(1, 30 * Time.deltaTime, true);
+        }
+        else if (Input.GetKey(down) && timer > 0.15f)
+        {
+            if (currentPos == 3)
+            {
+                currentPos = 1;
+            }
+            else
+            {
+                currentPos++;
+            }
+            timer = 0;
+        }
+
+        if(Input.GetKey(enter) && currentPos == 1)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }
