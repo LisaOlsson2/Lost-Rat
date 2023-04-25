@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    readonly float timescale = 1.4f;
+    public readonly float timescale = 1.4f;
     public GameObject InGameMenu;
     // Update is called once per frame
     public void StartPause()
