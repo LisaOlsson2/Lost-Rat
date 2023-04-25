@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    readonly float legStrength = 4300, jumpForce = 450, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 11, extraJumpForce = 130, timescale = 1.4f, camBorder = 110, rotationSpeed = 50;
+    readonly float legStrength = 4300, jumpForce = 450, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 11, extraJumpForce = 130, camBorder = 110, rotationSpeed = 50;
 
     [SerializeField]
     Transform cam;
@@ -20,7 +20,15 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = timescale;
+        if (FindObjectOfType<PauseMenu>() != null)
+        {
+            Time.timeScale = FindObjectOfType<PauseMenu>().timescale;
+        }
+        else
+        {
+            Time.timeScale = 1.4f;
+        }
+
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
