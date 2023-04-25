@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     Transform cam;
 
     Rigidbody rb;
+    SpriteRenderer sr;
     GameObject ground;
 
     bool grounded, flipped;
@@ -19,6 +20,7 @@ public class Movement : MonoBehaviour
     {
         Time.timeScale = timescale;
         rb = GetComponent<Rigidbody>();
+        sr = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -55,12 +57,12 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxVelocity)
         {
             rb.AddForce(Vector3.left * legStrength * Time.deltaTime);
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            sr.flipX = true;
         }
         if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxVelocity)
         {
             rb.AddForce(Vector3.right * legStrength * Time.deltaTime);
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            sr.flipX = false;
         }
 
         if (Input.GetKeyDown(KeyCode.W))
