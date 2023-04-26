@@ -150,7 +150,14 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject == ground)
         {
-            grounded = false;
+            if (grounded)
+            {
+                grounded = false;
+            }
+            else
+            {
+                falling = 0;
+            }
         }
         else
         {
