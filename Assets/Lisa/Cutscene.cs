@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
-    readonly float duration = 5;
+    readonly float duration = 4;
+
+    [SerializeField]
+    GameObject[] frames;
+
     float timer;
+    int frame;
 
     void Update()
     {
@@ -16,7 +21,17 @@ public class Cutscene : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Game Scene");
+            timer = 0;
+            frame++;
+            if (frame < frames.Length)
+            {
+                frames[frame - 1].SetActive(false);
+                frames[frame].SetActive(true);
+            }
+            else
+            {
+                SceneManager.LoadScene("Game Scene");
+            }
         }
     }
 }

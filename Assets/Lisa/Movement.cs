@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    readonly float legStrength = 4300, jumpForce = 450, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 11, extraJumpForce = 130, camBorder = 110, rotationSpeed = 50;
+    readonly float legStrength = 4300, jumpForce = 450, maxVelocity = 13, flipTime = 0.8f, maxJumpVelocity = 11, extraJumpForce = 130, camBorderLeft = -48, camBorderRight = 60, rotationSpeed = 50;
 
     [SerializeField]
     Transform cam;
@@ -58,7 +58,7 @@ public class Movement : MonoBehaviour
         }
         
 
-        if ((cam.position.x < camBorder && cam.position.x < transform.position.x) || (cam.position.x > -camBorder && cam.position.x > transform.position.x))
+        if ((cam.position.x < camBorderRight && cam.position.x < transform.position.x) || (cam.position.x > camBorderLeft && cam.position.x > transform.position.x))
         {
             cam.position = new Vector3(transform.position.x, cam.position.y, cam.position.z);
             //cam.position += new Vector3(transform.position.x - cam.position.x, 0, 0) * camSpeed * Time.deltaTime;
