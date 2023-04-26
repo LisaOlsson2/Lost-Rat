@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//I HAVE NP PLUS A BAZILLION ESSAYS TO WRITE WHY DID I SIGN UP FOR THIS.
+//I HAVE NP PLUS A BAZILLION ESSAYS TO WRITE WHY DID I SIGN UP FOR THIS. Also this code is made by Alexander and is an incredibly basic main menu code.
 
 public class PressStart : MonoBehaviour
 {

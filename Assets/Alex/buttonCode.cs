@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class buttonCode : MonoBehaviour
 {
+
+    //Basic button code made by Alex. I REALLY doubt anything here needs explanation. If it does feel free to contact me.
     [SerializeField]
     private int buttonID;
     [SerializeField]
