@@ -558,7 +558,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 390007706}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: StartPause
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
