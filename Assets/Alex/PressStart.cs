@@ -10,6 +10,8 @@ public class PressStart : MonoBehaviour
     [SerializeField]
     public AudioSource bgMusic;
     [SerializeField]
+    public AudioSource cancelSE;
+    [SerializeField]
     public KeyCode enter;
     [SerializeField]
     public KeyCode back;
@@ -76,9 +78,21 @@ public class PressStart : MonoBehaviour
             timer = 0;
         }
 
-        if(Input.GetKey(enter) && currentPos == 1)
+        if (Input.GetKey(enter))
         {
-            SceneManager.LoadScene(1);
+            if (currentPos == 1)
+            {
+                SceneManager.LoadScene(1);
+            }
+            else if(currentPos == 2 && timer > 0.15f)
+            {
+                cancelSE.Play();
+                timer = 0;
+            }
+            else if(currentPos == 3)
+            {
+                Application.Quit();
+            }
         }
     }
 }
