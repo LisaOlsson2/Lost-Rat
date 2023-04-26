@@ -176,6 +176,7 @@ public class Movement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Destroy(FindObjectOfType<BackgroundMusic>().gameObject);
         SceneManager.LoadScene("Ending");
     }
 }
