@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     Animator animator;
 
     bool grounded, flipped;
-    int rotating;
+    int rotating, falling;
 
     void Start()
     {
@@ -76,11 +76,11 @@ public class Movement : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
-        if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxVelocity)
+        if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxVelocity && falling != 1)
         {
             rb.AddForce(Vector3.left * legStrength * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxVelocity)
+        if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxVelocity  && falling != -1)
         {
             rb.AddForce(Vector3.right * legStrength * Time.deltaTime);
         }
@@ -130,11 +130,19 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && collision.GetContact(0).normal == Vector3.up)
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            ground = collision.gameObject;
-            flipped = false;
-            grounded = true;
+            if (collision.GetContact(0).normal == Vector3.up)
+            {
+                ground = collision.gameObject;
+                flipped = false;
+                grounded = true;
+            }
+            else
+            {
+                rb.velocity = rb.velocity.y * Vector3.up;
+                falling = Mathf.RoundToInt(collision.GetContact(0).normal.x);
+            }
         }
     }
 
@@ -143,6 +151,10 @@ public class Movement : MonoBehaviour
         if (collision.gameObject == ground)
         {
             grounded = false;
+        }
+        else
+        {
+            falling = 0;
         }
     }
 
